@@ -238,6 +238,7 @@ def main():
 
 
     from optparse import OptionParser
+    # 3.2 版后已移除，新版本python应该使用argparse
     usage = "usage: %prog [options] -g [GENOME] -i [INPUT_REGION_GFF] -r [RANKBY_BAM_FILE] -o [OUTPUT_FOLDER] [OPTIONAL_FLAGS]"
     parser = OptionParser(usage = usage)
     #required flags
@@ -268,6 +269,7 @@ def main():
 
 
     if not options.input or not options.rankby or not options.out or not options.genome:
+        # 没有输入时打印帮助信息
         print('hi there')
         parser.print_help()
         exit()
@@ -300,7 +302,7 @@ def main():
 
 
     #GETTING THE LIST OF BAMFILES TO PROCESS
-    if options.control:        
+    if options.control:
         bamFileList = [options.rankby,options.control]
 
     else:
@@ -313,7 +315,7 @@ def main():
 
     #Stitch parameter
     stitchWindow = int(options.stitch)
-    
+
     #tss options
     tssWindow = int(options.tss)
     if tssWindow != 0:
@@ -337,10 +339,10 @@ def main():
         'HG18':'%s/annotation/hg18_refseq.ucsc' % (cwd),
         'MM9': '%s/annotation/mm9_refseq.ucsc' % (cwd),
         'HG19':'%s/annotation/hg19_refseq.ucsc' % (cwd),
-	'HG38':'%s/annotation/hg38_refseq.ucsc' % (cwd),
+        'HG38':'%s/annotation/hg38_refseq.ucsc' % (cwd),
         'MM8': '%s/annotation/mm8_refseq.ucsc' % (cwd),
         'MM10':'%s/annotation/mm10_refseq.ucsc' % (cwd),
-        }
+    }
 
     annotFile = genomeDict[upper(genome)]
 
